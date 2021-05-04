@@ -16,25 +16,51 @@
             int frameIndex = 0;
             for (int frame = 0; frame < 10; frame++)
             {
-                if (IsSpare(frameIndex))
+                if (IsStrike(frameIndex))
                 {
-                    score += 10 + _rolls[frameIndex + 2];
+                    score += 10 + StrikeBonus(frameIndex);
+                    frameIndex++;
+                }
+                else if (IsSpare(frameIndex))
+                {
+                    score += 10 + SpareBonus(frameIndex);
                     frameIndex += 2;
                 }
                 else
                 {
-                    score += _rolls[frameIndex] +
-                             _rolls[frameIndex + 1];
+                    score += SumOfBallsInFrame(frameIndex);
                     frameIndex += 2;
                 }
             }
             return score;
         }
 
+        #region Private Methods
         private bool IsSpare(int frameIndex)
         {
             return _rolls[frameIndex] +
                    _rolls[frameIndex + 1] == 10;
         }
+
+        private bool IsStrike(int frameIndex)
+        {
+            return _rolls[frameIndex] == 10;
+        }
+
+        private int SumOfBallsInFrame(int frameIndex)
+        {
+            return _rolls[frameIndex] + _rolls[frameIndex + 1];
+        }
+
+        private int SpareBonus(int frameIndex)
+        {
+            return _rolls[frameIndex + 2];
+        }
+
+        private int StrikeBonus(int frameIndex)
+        {
+            return _rolls[frameIndex + 1] + _rolls[frameIndex + 2];
+        }
+        #endregion Private Methods
     }
 }

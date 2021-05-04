@@ -37,10 +37,25 @@ namespace BowlingGameTests
             RollSpare();
             _game.Roll(3);
             RollMany(17, 0);
-            Assert.AreEqual(16, _game.Score(), "Score expected to be 20");
+            Assert.AreEqual(16, _game.Score(), "Score expected to be 16");
+        }
+
+        [TestMethod]
+        public void TestOneStrike()
+        {
+            RollStrike();
+            _game.Roll(3);
+            _game.Roll(4);
+            RollMany(16, 0);
+            Assert.AreEqual(24, _game.Score(), "Score expected to be 24");
         }
 
         #region Private Methods
+        private void RollStrike()
+        {
+            _game.Roll(10);
+        }
+
         private void RollSpare()
         {
             _game.Roll(5);
