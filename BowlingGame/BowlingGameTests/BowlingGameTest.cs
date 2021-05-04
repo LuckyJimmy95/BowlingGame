@@ -31,11 +31,28 @@ namespace BowlingGameTests
             Assert.AreEqual(20, _game.Score(), "Score expected to be 20");
         }
 
+        [TestMethod]
+        public void TestOneSpare()
+        {
+            RollSpare();
+            _game.Roll(3);
+            RollMany(17, 0);
+            Assert.AreEqual(16, _game.Score(), "Score expected to be 20");
+        }
+
+        #region Private Methods
+        private void RollSpare()
+        {
+            _game.Roll(5);
+            _game.Roll(5);
+        }
+
         private void RollMany(int n, int pins)
         {
             for (int i = 0; i < n; i++)
                 _game.Roll(pins);
 
         }
+        #endregion Private Methods
     }
 }
