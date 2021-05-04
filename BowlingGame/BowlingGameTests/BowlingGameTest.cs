@@ -50,6 +50,14 @@ namespace BowlingGameTests
             Assert.AreEqual(24, _game.Score(), "Score expected to be 24");
         }
 
+        [TestMethod]
+        public void TestPerfectGame()
+        {
+            RollMany(12, 10);
+            Assert.AreEqual(300, _game.Score(), "Score expected to be 300");
+        }
+
+
         #region Private Methods
         private void RollStrike()
         {
